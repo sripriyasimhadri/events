@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+  <head>
+    <title>UF Event Dashboard</title>
+  </head>
+  <body>
+
+
+<div class="filter-container">
+  </br>
+  </br>
+  </br>
+  </br>
+  <div class="filter-search-container">
+  <input type="text" id="filter-search" placeholder="Search filters...">
+</div>
+  <a href="#" class="active">All</a></br>
+  <a href="#music">Music</a>
+  <a href="#performance">Performance</a>
+  <a href="#">Dress Code</a>
+  <a href="#">Food & Drinks</a>
+  <a href="#">Price Range</a>
+  <a href="#">Location</a>
+  <a href="#">Age Limit</a>
+  <a href="#">Clubs</a>
+</div>
+
+    <h1>UF Event Dashboard</h1>
+    <ul id="music">
+      <li data-filter="music">
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>ROCK STAR MUSIC FESTIVAL</h2>
+          <p>Rockstar music fest </p>
+          <p>Date and Time: 01/01/2023 7:00pm</p>
+          <p>Place: University of Florida</p>
+          <a href="{% url 'events1' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>SYMPHONY</h2>
+          <p>Classical conversations: April in Paris</p>
+          <p>Date and Time: Wednesday,19th April 2023 6:00 PM EST</p>
+            <p>Place: Zoom</p>
+            <a href="{% url 'events2' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>FROG SONG ORGANICS</h2>
+          <p>Spring food festival</p>
+          <p>Date and Time: Saturday,15th April 2023 1:00 PM EST</p>
+          <p>Place: Gainesville</p>
+          <a href="{% url 'events3' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+    </ul>
+
+<ul id="performance">
+      <li data-filter="performance">
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>SOUTH BEACH FESTIVAL</h2>
+          <p>south beach food festival for colourful events</p>
+          <p>Date and Time: Saturday,15th April 2023 1:00 PM EST</p>
+          <p>Place: Jacksonville</p>
+          <a href="{% url 'events4' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>SAVANNAH MUSIC FESTIVAL</h2>
+          <p>music festival in Savannah</p>
+          <p>Date and Time: March 23-April 8 2023</p>
+            <p>Place: Savannah</p>
+            <a href="{% url 'events5' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/eve.png' %}" alt="My Image" width="500" height="80">
+        <div>
+          <h2>MIAMI DANCE</h2>
+          <p>Dance festival in Miami</p>
+          <p>Date and Time: 22nd April 2023 1:00 PM EST</p>
+          <p>Place: Miami</p>
+          <a href="{% url 'events6' %}" id="view-details">View More Details</a>
+        </div>
+      </li>
+    </ul>
+  <script>
+    const searchInput = document.getElementById('filter-search');
+const filterItems = document.querySelectorAll('.filter-container a');
+
+searchInput.addEventListener('keyup', function(event) {
+  const searchTerm = event.target.value.toLowerCase();
+
+  filterItems.forEach(function(item) {
+    const itemText = item.textContent.toLowerCase();
+
+    if (itemText.includes(searchTerm)) {
+      item.style.display = 'inline-block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+
+const musicFilter = document.querySelector('a[href="#music"]');
+const musicUl = document.querySelector('#music');
+const musicLis = musicUl.querySelectorAll('li');
+
+musicFilter.addEventListener('click', function() {
+  musicLis.forEach(function(li) {
+    if (li.getAttribute('data-filter') !== 'music') {
+      li.classList.add('hidden');
+    } else {
+      li.classList.remove('hidden');
+    }
+  });
+
+  musicUl.classList.remove('hidden');
+});
+
+const performanceFilter = document.querySelector('a[href="#performance"]');
+const performanceUl = document.querySelector('#performance');
+const performanceLis = performanceUl.querySelectorAll('li');
+
+performanceFilter.addEventListener('click', function() {
+  performanceLis.forEach(function(li) {
+    if (li.getAttribute('data-filter') !== 'performance') {
+      li.classList.add('hidden');
+    } else {
+      li.classList.remove('hidden');
+    }
+  });
+
+  performanceUl.classList.remove('hidden');
+});
+  </script>
+  </body>
+<style>
+.hidden {
+  display: none;
+}
+      body {
+  background-color: white;
+  color: crimson;
+  margin: 0; /* remove default margin */
+}
+
+h1 {
+  color: white;
+  background-color: crimson;
+  font-weight: bold;
+  margin: 0;
+  padding: 20px;
+  text-indent: 220px;
+}
+
+.filter-container {
+  background-color: #f2f2f2;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.filter-container a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  margin-bottom: 5px; /* add margin bottom to create space between filters */
+}
+
+.filter-container a:hover {
+  color: crimson;
+}
+
+.active {
+  background-color: crimson;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 220px;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+#view-details {
+  background-color: crimson;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.filter-search-container {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10px;
+}
+
+#filter-search {
+  width: 75%;
+  height: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column; /* change the flex direction to column to display filters in one line */
+  justify-content: flex-start; /* align filters to the top of the container */
+}
+
+    </style>
+</html>
